@@ -1,46 +1,42 @@
 import azure.functions as func
-import datetime
 import json
 import logging
 import os
 import requests
 
-app = func.FunctionApp()
-
-# Dataverse configuration
-DATAVERSE_URL = os.environ.get("DATAVERSE_URL")
-CLIENT_ID = os.environ.get("CLIENT_ID")
-CLIENT_SECRET = os.environ.get("CLIENT_SECRET")
-TENANT_ID = os.environ.get("TENANT_ID")
-
-def get_access_token():
-    """Obtains an OAuth 2.0 access token for Dataverse."""
-    token_url = f"https://login.microsoftonline.com/{TENANT_ID}/oauth2/v2.0/token"
-    headers = {"Content-Type": "application/x-www-form-urlencoded"}
-    data = {
-        "client_id": CLIENT_ID,
-        "scope": f"{DATAVERSE_URL}/.default",
-        "client_secret": CLIENT_SECRET,
-        "grant_type": "client_credentials",
-    }
-    response = requests.post(token_url, headers=headers, data=data)
-    response.raise_for_status()
-    return response.json()["access_token"]
-
-def create_dataverse_record(entity_name, data, access_token):
-    """Creates a record in Dataverse."""
-    headers = {
-        "Authorization": f"Bearer {access_token}",
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-    }
-    response = requests.post(f"{DATAVERSE_URL}/api/data/v9.2/{entity_name}", headers=headers, data=json.dumps(data))
-    response.raise_for_status()
-    return response.json()
-
-@app.route(route="GenerateDemo", methods=["POST"])
-def GenerateDemo(req: func.HttpRequest) -> func.HttpResponse:
+def main(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
+
+    # Dataverse configuration
+    DATAVERSE_URL = os.environ.get("DATAVERSE_URL")
+    CLIENT_ID = os.environ.get("CLIENT_ID")
+    CLIENT_SECRET = os.environ.get("CLIENT_SECRET")
+    TENANT_ID = os.environ.get("TENANT_ID")
+
+    def get_access_token():
+        """Obtains an OAuth 2.0 access token for Dataverse."""
+        token_url = f"https://login.microsoftonline.com/{TENANT_ID}/oauth2/v2.0/token"
+        headers = {"Content-Type": "application/x-www-form-urlencoded"}
+        data = {
+            "client_id": CLIENT_ID,
+            "scope": f"{DATAVERSE_URL}/.default",
+            "client_secret": CLIENT_SECRET,
+            "grant_type": "client_credentials",
+        }
+        response = requests.post(token_url, headers=headers, data=data)
+        response.raise_for_status()
+        return response.json()["access_token"]
+
+    def create_dataverse_record(entity_name, data, access_token):
+        """Creates a record in Dataverse."""
+        headers = {
+            "Authorization": f"Bearer {access_token}",
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+        }
+        response = requests.post(f"{DATAVERSE_URL}/api/data/v9.2/{entity_name}", headers=headers, data=json.dumps(data))
+        response.raise_for_status()
+        return response.json()
 
     try:
         req_body = req.get_json()
