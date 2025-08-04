@@ -61,18 +61,37 @@ def GenerateDemo(req: func.HttpRequest) -> func.HttpResponse:
         req_body = req.get_json()
     except ValueError:
         return func.HttpResponse(
-             "Please pass a JSON body with companyName, priorities, and userName.",
+             "Please pass a JSON body with required fields.",
              status_code=400
         )
 
     company_name = req_body.get('companyName')
-    priorities = req_body.get('priorities')
+    agent_requested = req_body.get('agentRequested', 'Personal Assistant Agent')
+    
+    # Handle different field names from different modals
     user_name = req_body.get('userName')
-    agent_requested = req_body.get('agentRequested', 'Personal Assistant Agent') # Assuming a default or passed from frontend
+    contact_name = req_body.get('contactName')
+    priorities = req_body.get('priorities')
+    lead_type = req_body.get('leadType')
+    contact_email = req_body.get('contactEmail')
+    hr_task = req_body.get('hrTask')
+    
+    # Use the appropriate name field
+    name_field = user_name or contact_name or "Unknown"
+    
+    # Create a description based on the agent type
+    if agent_requested == 'Personal Assistant Agent':
+        description = priorities or "General automation"
+    elif agent_requested == 'Lead Generator Agent':
+        description = f"Lead Type: {lead_type}" if lead_type else "Lead generation"
+    elif agent_requested == 'HR Agent':
+        description = hr_task or "HR automation"
+    else:
+        description = "General service"
 
-    if not all([company_name, priorities, user_name]):
+    if not company_name:
         return func.HttpResponse(
-            "Please pass companyName, priorities, and userName in the request body.",
+            "Please pass companyName in the request body.",
             status_code=400
         )
 
@@ -84,28 +103,29 @@ def GenerateDemo(req: func.HttpRequest) -> func.HttpResponse:
         # 2. Simulate fetching prompt from Dataverse (e.g., based on agent_requested)
         # In a real scenario, you'd query e365_prompt based on e365_agent
         # For this demo, we'll use a hardcoded prompt structure
-        prompt_template = f"As a {agent_requested} for {company_name}, your top priorities are {priorities}. Please generate a demo for {user_name}."
-        generated_prompt = prompt_template.format(
-            company_name=company_name,
-            priorities=priorities,
-            user_name=user_name
-        )
+        prompt_template = f"As a {agent_requested} for {company_name}, focusing on {description}. Please generate a demo for {name_field}."
+        generated_prompt = prompt_template
+
         logging.info(f"Generated Prompt: {generated_prompt}")
 
         # 3. Store client registration in Dataverse
         contact_submission_data = {
-            "e365_name": f"{user_name} - {company_name}",
-            "e365_firstname": user_name.split(" ")[0] if user_name else "",
-            "e365_surname": user_name.split(" ")[1] if user_name and len(user_name.split(" ")) > 1 else "",
+            "e365_name": f"{name_field} - {company_name}",
+            "e365_firstname": name_field.split(" ")[0] if name_field else "",
+            "e365_surname": name_field.split(" ")[1] if name_field and len(name_field.split(" ")) > 1 else "",
             "e365_companyname": company_name,
             "e365_agentrequested": agent_requested,
-            # Add other fields like email, phone if available from frontend
         }
-        create_dataverse_record("e365_contactformsubmissions", contact_submission_data, access_token)
+        
+        # Add email if provided
+        if contact_email:
+            contact_submission_data["e365_email"] = contact_email
+            
+        create_dataverse_record("e365_contactformsubmission", contact_submission_data, access_token)
         logging.info("Successfully created contact form submission in Dataverse.")
 
         # 4. Generate Demo Response
-        demo_response = f"Demo for {agent_requested} generated for {user_name} at {company_name} with priorities: {priorities}. Prompt used: \"{generated_prompt}\"."
+        demo_response = f"Demo for {agent_requested} generated for {name_field} at {company_name} focusing on: {description}. Prompt used: \"{generated_prompt}\"."
 
         return func.HttpResponse(
             json.dumps({"message": demo_response, "prompt": generated_prompt}),
