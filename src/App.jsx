@@ -5,7 +5,6 @@ import { Header } from "./components_template/header";
 import { Features } from "./components_template/features";
 import { About } from "./components_template/about";
 import { Services as TemplateServices } from "./components_template/services"; // Renamed to avoid conflict
-import { Gallery as TemplateGallery } from "./components_template/gallery"; // Renamed to avoid conflict
 import { Testimonials } from "./components_template/testimonials";
 import { Team } from "./components_template/Team";
 import { Contact } from "./components_template/contact";
@@ -71,7 +70,6 @@ const App = () => {
         <Features data={landingPageData.Features} />
         <About data={landingPageData.About} />
         <TemplateServices data={landingPageData.Services} />
-        <TemplateGallery data={landingPageData.Gallery} />
         <Testimonials data={landingPageData.Testimonials} />
         <Team data={landingPageData.Team} />
         <Contact data={landingPageData.Contact} />
