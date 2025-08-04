@@ -20,132 +20,157 @@
   },
   "Gallery": [
     {
-      "title": "Project Title",
+      "id": "gallery-1",
+      "title": "Project Title 1",
       "largeImage": "img/portfolio/01-large.jpg",
       "smallImage": "img/portfolio/01-small.jpg"
     },
     {
-      "title": "Project Title",
+      "id": "gallery-2",
+      "title": "Project Title 2",
       "largeImage": "img/portfolio/02-large.jpg",
       "smallImage": "img/portfolio/02-small.jpg"
     },
     {
-      "title": "Project Title",
+      "id": "gallery-3",
+      "title": "Project Title 3",
       "largeImage": "img/portfolio/03-large.jpg",
       "smallImage": "img/portfolio/03-small.jpg"
     },
     {
-      "title": "Project Title",
+      "id": "gallery-4",
+      "title": "Project Title 4",
       "largeImage": "img/portfolio/04-large.jpg",
       "smallImage": "img/portfolio/04-small.jpg"
     },
     {
-      "title": "Project Title",
+      "id": "gallery-5",
+      "title": "Project Title 5",
       "largeImage": "img/portfolio/05-large.jpg",
       "smallImage": "img/portfolio/05-small.jpg"
     },
     {
-      "title": "Project Title",
+      "id": "gallery-6",
+      "title": "Project Title 6",
       "largeImage": "img/portfolio/06-large.jpg",
       "smallImage": "img/portfolio/06-small.jpg"
     },
     {
-      "title": "Project Title",
+      "id": "gallery-7",
+      "title": "Project Title 7",
       "largeImage": "img/portfolio/07-large.jpg",
       "smallImage": "img/portfolio/07-small.jpg"
     },
     {
-      "title": "Project Title",
+      "id": "gallery-8",
+      "title": "Project Title 8",
       "largeImage": "img/portfolio/08-large.jpg",
       "smallImage": "img/portfolio/08-small.jpg"
     },
     {
-      "title": "Project Title",
+      "id": "gallery-9",
+      "title": "Project Title 9",
       "largeImage": "img/portfolio/09-large.jpg",
       "smallImage": "img/portfolio/09-small.jpg"
     }
   ],
   "Services": [
     {
+      "id": "service-1",
       "icon": "fa fa-wordpress",
-      "name": "Lorem ipsum dolor",
+      "name": "Lorem ipsum dolor 1",
       "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at."
     },
     {
+      "id": "service-2",
       "icon": "fa fa-cart-arrow-down",
-      "name": "Consectetur adipiscing",
+      "name": "Consectetur adipiscing 1",
       "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at."
     },
     {
+      "id": "service-3",
       "icon": "fa fa-cloud-download",
-      "name": "Lorem ipsum dolor",
+      "name": "Lorem ipsum dolor 2",
       "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at."
     },
     {
+      "id": "service-4",
       "icon": "fa fa-language",
-      "name": "Consectetur adipiscing",
+      "name": "Consectetur adipiscing 2",
       "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at."
     },
     {
+      "id": "service-5",
       "icon": "fa fa-plane",
-      "name": "Lorem ipsum dolor",
+      "name": "Lorem ipsum dolor 3",
       "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at."
     },
     {
+      "id": "service-6",
       "icon": "fa fa-pie-chart",
-      "name": "Consectetur adipiscing",
+      "name": "Consectetur adipiscing 3",
       "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at."
     }
   ],
   "Testimonials": [
     {
+      "id": "testimonial-1",
       "img": "img/testimonials/01.jpg",
       "text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
-      "name": "John Doe"
+      "name": "John Doe 1"
     },
     {
+      "id": "testimonial-2",
       "img": "img/testimonials/02.jpg",
       "text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
-      "name": "Johnathan Doe"
+      "name": "Johnathan Doe 1"
     },
     {
+      "id": "testimonial-3",
       "img": "img/testimonials/03.jpg",
       "text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
-      "name": "John Doe"
+      "name": "John Doe 2"
     },
     {
+      "id": "testimonial-4",
       "img": "img/testimonials/04.jpg",
       "text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
-      "name": "Johnathan Doe"
+      "name": "Johnathan Doe 2"
     },
     {
+      "id": "testimonial-5",
       "img": "img/testimonials/05.jpg",
       "text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
-      "name": "John Doe"
+      "name": "John Doe 3"
     },
     {
+      "id": "testimonial-6",
       "img": "img/testimonials/06.jpg",
       "text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
-      "name": "Johnathan Doe"
+      "name": "Johnathan Doe 3"
     }
   ],
   "Team": [
     {
+      "id": "team-1",
       "img": "img/team/01.jpg",
       "name": "John Doe",
       "job": "Director"
     },
     {
+      "id": "team-2",
       "img": "img/team/02.jpg",
       "name": "Mike Doe",
       "job": "Senior Designer"
     },
     {
+      "id": "team-3",
       "img": "img/team/03.jpg",
       "name": "Jane Doe",
       "job": "Senior Designer"
     },
     {
+      "id": "team-4",
       "img": "img/team/04.jpg",
       "name": "Karen Doe",
       "job": "Project Manager"
@@ -161,23 +186,27 @@
   },
   "Features": [
     {
+      "id": "feature-1",
       "icon": "fa fa-comments-o",
-      "title": "Lorem ipsum",
+      "title": "Lorem ipsum 1",
       "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
     },
     {
+      "id": "feature-2",
       "icon": "fa fa-bullhorn",
-      "title": "Lorem ipsum",
+      "title": "Lorem ipsum 2",
       "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
     },
     {
+      "id": "feature-3",
       "icon": "fa fa-group",
-      "title": "Lorem ipsum",
+      "title": "Lorem ipsum 3",
       "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
     },
     {
+      "id": "feature-4",
       "icon": "fa fa-magic",
-      "title": "Lorem ipsum",
+      "title": "Lorem ipsum 4",
       "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
     }
   ]
