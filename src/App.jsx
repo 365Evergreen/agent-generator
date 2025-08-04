@@ -45,12 +45,17 @@ const products = [
 
 function ProductGallery() { // Renamed to avoid conflict with template's Gallery
   return (
-    <div>
-      <h1>Our Products</h1>
-      <div className="gallery">
-        {products.map(product => (
-          <ProductCard key={product.name} {...product} />
-        ))}
+    <div id="products" className="text-center">
+      <div className="container">
+        <div className="section-title">
+          <h2>Our Products</h2>
+          <p>Discover our AI-powered automation solutions designed to transform your business operations.</p>
+        </div>
+        <div className="gallery">
+          {products.map(product => (
+            <ProductCard key={product.name} {...product} />
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -67,6 +72,7 @@ const App = () => {
       <div>
         <Navigation />
         <Header data={landingPageData.Header} />
+        <ProductGallery /> {/* Moved up to sit below the hero image */}
         <Features data={landingPageData.Features} />
         <About data={landingPageData.About} />
         <TemplateServices data={landingPageData.Services} />
@@ -75,7 +81,7 @@ const App = () => {
         <Contact data={landingPageData.Contact} />
 
         <Routes>
-          <Route path="/" element={<ProductGallery />} /> {/* Display your product gallery on the home page */}
+          <Route path="/" element={<div />} /> {/* Empty element for home page since ProductGallery is now above */}
           <Route path="/personal-assist" element={<PersonalAssist />} />
           <Route path="/lead-generator" element={<LeadGenerator />} />
           <Route path="/hr-agent" element={<HrAgent />} />

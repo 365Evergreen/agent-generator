@@ -16,7 +16,31 @@ code {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
-  padding: 20px;
+  padding: 20px 0;
+}
+
+/* Products section styling */
+#products {
+  padding: 80px 0;
+  background-color: #f8f9fa;
+}
+
+#products .section-title {
+  margin-bottom: 50px;
+}
+
+#products .section-title h2 {
+  font-size: 36px;
+  font-weight: 400;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+#products .section-title p {
+  font-size: 18px;
+  color: #666;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .product-card {
