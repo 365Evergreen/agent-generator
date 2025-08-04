@@ -175,3 +175,44 @@ form button:disabled {
   margin-bottom: 30px;
   font-size: 18px;
 }
+
+/* Header left alignment styling */
+.intro-text-left {
+  padding-top: 350px;
+  padding-bottom: 200px;
+  text-align: left;
+  padding-left: 15px; /* Align with navbar brand padding */
+}
+
+.intro-text-left h1 {
+  font-size: 65px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.intro-text-left p {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 300;
+  margin-bottom: 40px;
+  max-width: 600px;
+}
+
+@media (max-width: 768px) {
+  .intro-text-left {
+    padding-top: 200px;
+    padding-bottom: 100px;
+    text-align: center;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  
+  .intro-text-left h1 {
+    font-size: 45px;
+  }
+  
+  .intro-text-left p {
+    font-size: 18px;
+  }
+}
