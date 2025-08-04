@@ -11,11 +11,29 @@ function LeadGeneratorModal() {
     event.preventDefault();
     setIsLoading(true);
 
-    // Mock API response for demo purposes
-    // Simulate API delay
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    const mockResult = `🎯 Lead Generator Agent Demo for ${companyName}
+    try {
+      // Call the Azure Function API
+      const response = await fetch('/api/GenerateDemo', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+          companyName: companyName,
+          leadType: leadType,
+          contactEmail: contactEmail,
+          agentRequested: 'Lead Generator Agent'
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const result = await response.json();
+      
+      // Create a formatted demo result
+      const mockResult = `🎯 Lead Generator Agent Demo for ${companyName}
 
 Lead Generation Configuration:
 - Target Type: ${leadType}
@@ -48,9 +66,56 @@ Lead Generation Configuration:
 
 🚀 Your lead generation system is ready to scale your sales pipeline for ${companyName}!
 
-Note: This is a demo response. The actual system would integrate with your CRM and sales tools.`;
+Generated Prompt: "${result.prompt}"
 
-    setDemoResult(mockResult);
+✅ Submission recorded successfully in Dataverse!
+Note: This submission has been saved to the database for follow-up.`;
+
+      setDemoResult(mockResult);
+    } catch (error) {
+      console.error('Error calling API:', error);
+      
+      // Fallback to mock response if API fails
+      const fallbackResult = `🎯 Lead Generator Agent Demo for ${companyName}
+
+Lead Generation Configuration:
+- Target Type: ${leadType}
+- Contact: ${contactEmail}
+
+⚠️ Note: Could not connect to database. This is a demo response only.
+
+✅ Automated Lead Discovery
+- Industry-specific prospect identification
+- Social media lead mining
+- Website visitor tracking and qualification
+
+✅ Engagement Automation
+- Personalized outreach sequences
+- Follow-up scheduling based on lead behavior
+- Multi-channel communication (email, LinkedIn, phone)
+
+✅ Lead Qualification
+- Automated scoring based on ${leadType} criteria
+- BANT (Budget, Authority, Need, Timeline) assessment
+- CRM integration and data enrichment
+
+✅ Performance Analytics
+- Conversion rate tracking
+- ROI analysis for different lead sources
+- A/B testing for outreach messages
+
+📈 Projected Results:
+- 40% increase in qualified leads
+- 60% reduction in manual prospecting time
+- 25% improvement in conversion rates
+
+🚀 Your lead generation system would be ready to scale your sales pipeline for ${companyName}!
+
+Error: ${error.message}`;
+
+      setDemoResult(fallbackResult);
+    }
+    
     setIsLoading(false);
   };
 

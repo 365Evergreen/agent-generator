@@ -11,14 +11,29 @@ function PersonalAssistModal() {
     event.preventDefault();
     setIsLoading(true);
 
-    // Mock API response for demo purposes
-    // In a real application, you would fetch the prompt from Dataverse,
-    // populate it with the form data, and then send it to the generation service.
-    
-    // Simulate API delay
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    const mockResult = `🤖 Personal Assistant Agent Demo for ${companyName}
+    try {
+      // Call the Azure Function API
+      const response = await fetch('/api/GenerateDemo', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+          companyName: companyName,
+          priorities: priorities,
+          userName: userName,
+          agentRequested: 'Personal Assistant Agent'
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const result = await response.json();
+      
+      // Create a formatted demo result
+      const mockResult = `🤖 Personal Assistant Agent Demo for ${companyName}
 
 Hello ${userName}! Based on your priorities: "${priorities}", here's your personalized AI assistant configuration:
 
@@ -39,9 +54,44 @@ Hello ${userName}! Based on your priorities: "${priorities}", here's your person
 
 🚀 Your assistant is ready to help streamline your workflows and boost productivity at ${companyName}!
 
-Note: This is a demo response. The actual system would integrate with your company's tools and data sources.`;
+Generated Prompt: "${result.prompt}"
 
-    setDemoResult(mockResult);
+✅ Submission recorded successfully in Dataverse!
+Note: This submission has been saved to the database for follow-up.`;
+
+      setDemoResult(mockResult);
+    } catch (error) {
+      console.error('Error calling API:', error);
+      
+      // Fallback to mock response if API fails
+      const fallbackResult = `🤖 Personal Assistant Agent Demo for ${companyName}
+
+Hello ${userName}! Based on your priorities: "${priorities}", here's your personalized AI assistant configuration:
+
+⚠️ Note: Could not connect to database. This is a demo response only.
+
+✅ Automated Task Management
+- Daily priority scheduling based on "${priorities}"
+- Smart calendar integration
+- Deadline tracking and reminders
+
+✅ Workflow Automation  
+- Email categorization and response suggestions
+- Meeting preparation and follow-up
+- Document organization for ${companyName}
+
+✅ Personal Productivity
+- Time blocking optimization
+- Focus time protection
+- Progress tracking for key priorities
+
+🚀 Your assistant would be ready to help streamline your workflows and boost productivity at ${companyName}!
+
+Error: ${error.message}`;
+
+      setDemoResult(fallbackResult);
+    }
+    
     setIsLoading(false);
   };
 

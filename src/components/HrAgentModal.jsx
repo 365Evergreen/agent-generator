@@ -11,11 +11,29 @@ function HrAgentModal() {
     event.preventDefault();
     setIsLoading(true);
 
-    // Mock API response for demo purposes
-    // Simulate API delay
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    const mockResult = `👥 HR Agent Demo for ${companyName}
+    try {
+      // Call the Azure Function API
+      const response = await fetch('/api/GenerateDemo', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+          companyName: companyName,
+          contactName: contactName,
+          hrTask: hrTask,
+          agentRequested: 'HR Agent'
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const result = await response.json();
+      
+      // Create a formatted demo result
+      const mockResult = `👥 HR Agent Demo for ${companyName}
 
 Hello ${contactName}! Your HR automation solution for "${hrTask}" is ready:
 
@@ -38,31 +56,84 @@ Hello ${contactName}! Your HR automation solution for "${hrTask}" is ready:
 - Audit trail maintenance
 
 ✅ Employee Experience
-- Self-service portal for common HR requests
-- Automated leave and time-off management
-- Benefits enrollment and changes
-- Employee survey and feedback collection
+- Automated survey deployment and analysis
+- Benefits enrollment assistance
+- Leave request processing
+- Employee self-service portal
 
-✅ Analytics & Insights
-- Employee engagement metrics
-- Turnover risk prediction
-- Performance trend analysis
-- HR process efficiency tracking
+✅ Talent Analytics
+- Turnover prediction and retention strategies
+- Skills gap analysis and training recommendations
+- Recruitment pipeline optimization
+- Compensation benchmarking
 
-📊 Expected Outcomes:
-- 50% reduction in administrative tasks
-- 30% faster onboarding process
-- 90% compliance rate improvement
-- 25% increase in employee satisfaction
+🎯 Focused Solution for: ${hrTask}
+- Customized workflows for your specific HR needs
+- Integration with existing HRIS systems
+- Compliance with labor regulations
+- Scalable across ${companyName}'s organization
 
-🚀 Your HR agent is configured to transform people operations at ${companyName}!
+🚀 Your HR automation system is ready to enhance employee experience and operational efficiency!
 
-Specialized Focus: ${hrTask}
-Primary Contact: ${contactName}
+Generated Prompt: "${result.prompt}"
 
-Note: This is a demo response. The actual system would integrate with your HRIS and company systems.`;
+✅ Submission recorded successfully in Dataverse!
+Note: This submission has been saved to the database for follow-up.`;
 
-    setDemoResult(mockResult);
+      setDemoResult(mockResult);
+    } catch (error) {
+      console.error('Error calling API:', error);
+      
+      // Fallback to mock response if API fails
+      const fallbackResult = `👥 HR Agent Demo for ${companyName}
+
+Hello ${contactName}! Your HR automation solution for "${hrTask}" is ready:
+
+⚠️ Note: Could not connect to database. This is a demo response only.
+
+✅ Employee Onboarding Automation
+- Digital welcome packets and document collection
+- Training schedule coordination
+- IT equipment and access provisioning
+- Buddy system assignment
+
+✅ Performance Management
+- Automated review scheduling and reminders
+- Goal tracking and progress monitoring
+- 360-feedback collection and analysis
+- Development plan recommendations
+
+✅ Compliance & Documentation
+- Policy acknowledgment tracking
+- Certification and training compliance
+- Employee record management
+- Audit trail maintenance
+
+✅ Employee Experience
+- Automated survey deployment and analysis
+- Benefits enrollment assistance
+- Leave request processing
+- Employee self-service portal
+
+✅ Talent Analytics
+- Turnover prediction and retention strategies
+- Skills gap analysis and training recommendations
+- Recruitment pipeline optimization
+- Compensation benchmarking
+
+🎯 Focused Solution for: ${hrTask}
+- Customized workflows for your specific HR needs
+- Integration with existing HRIS systems
+- Compliance with labor regulations
+- Scalable across ${companyName}'s organization
+
+🚀 Your HR automation system would be ready to enhance employee experience and operational efficiency!
+
+Error: ${error.message}`;
+
+      setDemoResult(fallbackResult);
+    }
+    
     setIsLoading(false);
   };
 
