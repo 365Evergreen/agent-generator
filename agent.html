@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ICT Help Agent</title>
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: #ffffff;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    #agent-container {
+      all: revert;
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="agent-container"></div>
+
+  <script src="https://copilotstudio.microsoft.com/webchat/bootstrap.js"></script>
+
+  <script>
+    window.WebChat.renderWebChat(
+      {
+        botId: "ee8c81bc-5ed8-409e-983a-cf570d401529"
+      },
+      document.getElementById("agent-container")
+    );
+  </script>
+</body>
+</html>
+
+
